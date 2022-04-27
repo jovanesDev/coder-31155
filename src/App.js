@@ -1,37 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
-import Prueba from './components/Prueba/Prueba';
+// import logo from './logo.svg';
+// import './App.css';
+// import Prueba from './components/Prueba/Prueba';
+// import Promise from './components/Promesas/Promise';
+import { useEffect, useState } from "react";
+import Promesa from "./components/Promesas/Promise";
 
 function App() {
+  // // esto es el backend del sony
 
-  let styles = {
+  const [juegos, setJuegos] = useState([]);
 
-    backgroundColor:"#fff"
-  }
+  const playStation = [
+    { nombre: "GOD OF WAR" },
+    { nombre: "HALO" },
+    { nombre: "CALL OF DUTY" },
+  ];
+  // const item = {
+  //   id: 1,
+  //   nombre: "galletita",
+  //   descripcion: "9 de oro ",
+  //   stock: 20,
+  // };
 
-  let condicion = false;
+  useEffect(() => {
+    const pedido = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(playStation);
+      }, 5000);
+    });
 
+    pedido
+      .then(
+        (res) => {
+          setJuegos(res);
+        },
+        (err) => {
+          console.log("error", err);
+        }
+      )
+      .then(() => console.log(juegos)) // playStation
+      .catch((err) => console.log(err));
 
+    console.log(juegos); // []
 
-
+    return () => {};
+  }, []);
 
   return (
     <div className="App">
-      <Prueba/>
-      <header style={{backgroundColor: condicion ? "red" : "black"}} className="App-header">
-        <img src={logo} className="App-logo" alt="logo"/>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Promesa juegos={juegos} />
     </div>
   );
 }
