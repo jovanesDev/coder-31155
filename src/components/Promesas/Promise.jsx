@@ -7,6 +7,7 @@ const Promesa = ({ juegos }) => {
         juegos.map((juego, index) => (
           <>
             <h1 key={index}>{juego.nombre}</h1>
+            {/* <Item nombre={juego.nombre} descripcion={juego.descr} /> */}
           </>
         ))
       ) : (
@@ -15,5 +16,10 @@ const Promesa = ({ juegos }) => {
     </>
   );
 };
+
+/* 
+    <ItemListContainer /> => <ItemList/> => X * <Item/>
+
+*/
 
 export default Promesa;
